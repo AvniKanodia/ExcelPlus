@@ -4,7 +4,7 @@
 #include <iostream>
 
 namespace Financial {
-    double XIRR(const std::vector<double>& cashFlows, const std::vector<int>& dates) {
+    double XIRR(const std::vector<double>& cashFlows, const std::vector<int>& dates, const double& rateOfReturn = 0.1) {
         //Check that cashFlows and dates are not empty and equal
         if (cashFlows.size() != dates.size() || cashFlows.empty()) throw std::invalid_argument("Incorrect date/cash flow values");
         
@@ -18,7 +18,7 @@ namespace Financial {
             if (hasPositive && hasNegative) break;
         }
 
-        if (!hasNegative || !hasNegative) throw std::invalid_argument("Incorrect cash flow values");
+        if (!hasNegative || !hasPositive) throw std::invalid_argument("Incorrect cash flow values");
 
         // Sort cashFlows and dates in chronological order
         std::vector<size_t> indices(dates.size());
@@ -40,7 +40,7 @@ namespace Financial {
             sortedDates.push_back(dates[i]);
         }
         
-         // Normalize dates to years from the first date
+        // Normalize dates to years from the first date
         std::vector<double> normalizedDates;
         int firstDate = sortedDates[0];
         for (int date : sortedDates) {
@@ -49,7 +49,7 @@ namespace Financial {
 
         int maxIterations = 100;
         double precision = 0.000001;
-        double rate = 0.1;
+        double rate = rateOfReturn;
 
         //Calculating the closest rate
         for (int i = 0; i < maxIterations; ++i) {
@@ -69,5 +69,44 @@ namespace Financial {
         }
 
         throw std::runtime_error("XIRR did not converge.");
+    }
+
+    double IRR(const std::vector<double>& cashFlows, const double& rateOfReturn = 0.1) {
+        //Check that cashFlows and dates are not empty and equal
+        if (cashFlows.empty()) throw std::invalid_argument("Incorrect cash flow values");
+        
+        //Check if cashFlows has atleast one positive and one negative value
+        bool hasPositive = false;
+        bool hasNegative = false;
+        for (double cashFlow : cashFlows) {
+            if (cashFlow > 0) hasPositive = true;
+            if (cashFlow < 0) hasNegative = true;
+            if (hasPositive && hasNegative) break;
+        }
+
+        if (!hasNegative || !hasPositive) throw std::invalid_argument("Incorrect cash flow values");
+
+        int maxIterations = 20;
+        double precision = 0.000001;
+        double rate = rateOfReturn;
+
+        //Calculating the closest rate
+        for (int i = 0; i < maxIterations; ++i) {
+            double pv = 0.0;
+            double pvDeriv = 0.0;
+
+            // Calculate present value and its derivative
+            for (size_t j = 0; j < cashFlows.size(); ++j) {
+                pv += cashFlows[j] / std::pow(1.0 + rate, j);
+                pvDeriv -= (j * cashFlows[j]) / std::pow(1.0 + rate, j + 1);
+            }
+
+            double newRate = rate - pv / pvDeriv;
+            if (std::abs(newRate - rate) < precision) return newRate; //Converged 
+
+            rate = newRate;
+        }
+
+        throw std::runtime_error("IRR did not converge.");
     }
 }
