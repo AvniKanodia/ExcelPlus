@@ -58,8 +58,8 @@ namespace Financial {
 
             // Calculate present value and its derivative
             for (size_t j = 0; j < sortedCashFlows.size(); ++j) {
-                pv += sortedCashFlows[j] / std::pow(1.0 + rate, normalizedDates[j]);
-                pvDeriv -= normalizedDates[j] * sortedCashFlows[j] * std::pow(1.0 + rate, -1 - normalizedDates[j]);
+                pv += sortedCashFlows[j] / std::pow(1.0 + rate, normalizedDates[j] / 365.0);
+                pvDeriv -= normalizedDates[j] / 365.0 * sortedCashFlows[j] * std::pow(1.0 + rate, -1 - normalizedDates[j] / 365.0);
                 }
 
             double newRate = rate - pv / pvDeriv;

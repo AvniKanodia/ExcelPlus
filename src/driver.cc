@@ -26,5 +26,5 @@ int main() {
     cashFlows2.push_back(-1113.4);
     cashFlows2.push_back(2515.2);
 
-    std::cout << "Rate of return: " << Financial::XIRR(cashFlows, dates) << std::endl;
+    std::cout << "Rate of return: " << Financial::XIRR(cashFlows2, dates2) << std::endl;
 }

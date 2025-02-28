@@ -10,13 +10,10 @@ namespace utilities {
         // Convert std::tm to std::chrono::system_clock::time_point
         std::time_t time1 = std::mktime(&tm1);
         std::time_t time2 = std::mktime(&tm2);
-
-        // Calculate the difference in seconds
-        auto duration = std::chrono::system_clock::from_time_t(time2) - std::chrono::system_clock::from_time_t(time1);
-
-        // Convert the difference to years
-        double secondsInYear = 365.25 * 24 * 60 * 60; // Account for leap years
-        return std::chrono::duration_cast<std::chrono::seconds>(duration).count() / secondsInYear;
+        
+        // Convert the difference to days
+        double days_diff = std::difftime(time2, time1) / 86400.0;
+        return days_diff;
     }
 
     std::tm yyyymmddToTm(int date) {
