@@ -4,9 +4,9 @@
 #include <string>
 
 namespace Financial {
-    double XIRR(const std::vector<double>& cashFlows, const std::vector<int>& dates);
-
     double XIRR(const std::vector<double>& cashFlows, const std::vector<std::string>& dates, const double& rateOfReturn);
+
+    double IRR(const std::vector<double>& cashFlows, const double& rateOfReturn);
 }
 
 #endif 
