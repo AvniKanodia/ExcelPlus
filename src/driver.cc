@@ -1,30 +1,21 @@
 #include "financial.hpp"
+#include "statistics.hpp"
 #include "utilities.hpp"
 #include <vector>
 #include <iostream>
 
 int main() {
-    std::vector<int> dates;
-    dates.push_back(20080101);
-    dates.push_back(20080301);
-    dates.push_back(20081030);
-    dates.push_back(20090401);
-    dates.push_back(20090215);
+    std::vector<double> values;
+    values.push_back(1345);
+    values.push_back(1301);
+    values.push_back(1368);
+    values.push_back(1322);
+    values.push_back(1310);
+    values.push_back(1370);
+    values.push_back(1318);
+    values.push_back(1350);
+    values.push_back(1303);
+    values.push_back(1299);
 
-    std::vector<double> cashFlows;
-    cashFlows.push_back(-10000);
-    cashFlows.push_back(2750);
-    cashFlows.push_back(4250);
-    cashFlows.push_back(2750);
-    cashFlows.push_back(3250);
-
-    std::vector<int> dates2;
-    dates2.push_back(20160401);
-    dates2.push_back(20210401);
-
-    std::vector<double> cashFlows2;
-    cashFlows2.push_back(-1113.4);
-    cashFlows2.push_back(2515.2);
-
-    std::cout << "Rate of return: " << Financial::XIRR(cashFlows2, dates2) << std::endl;
+    std::cout << Statistics::STDEV_S(values) << std::endl;
 }
