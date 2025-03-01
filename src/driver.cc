@@ -5,17 +5,19 @@
 #include <iostream>
 
 int main() {
-    std::vector<double> values;
-    values.push_back(1345);
-    values.push_back(1301);
-    values.push_back(1368);
-    values.push_back(1322);
-    values.push_back(1310);
-    values.push_back(1370);
-    values.push_back(1318);
-    values.push_back(1350);
-    values.push_back(1303);
-    values.push_back(1299);
+    std::vector<double> x;
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(9);
+    x.push_back(1);
+    x.push_back(8);
 
-    std::cout << Statistics::STDEV_S(values) << std::endl;
+    std::vector<double> y;
+    y.push_back(6);
+    y.push_back(5);
+    y.push_back(11);
+    y.push_back(7);
+    y.push_back(5);
+
+    std::cout << Statistics::INTERCEPT(y,x) << std::endl;
 }
