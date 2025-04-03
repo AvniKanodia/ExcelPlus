@@ -23,6 +23,13 @@ namespace Statistics {
     double SLOPE(const std::vector<double>& x, const std::vector<double>& y);
 
     double INTERCEPT(const std::vector<double>& x, const std::vector<double>& y);
+
+    double KURT(const std::vector<double>& values);
+
+    double SKEW(const std::vector<double>& values);
+
+    double SKEW_P(const std::vector<double>& values);
+
 }
 
 #endif 
