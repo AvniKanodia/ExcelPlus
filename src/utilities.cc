@@ -25,26 +25,26 @@ namespace utilities {
     }
 
     bool isValidDate(int date) {
-    int year = date / 10000;
-    int month = (date / 100) % 100;
-    int day = date % 100;
+        int year = date / 10000;
+        int month = (date / 100) % 100;
+        int day = date % 100;
 
-    // Check if month is valid
-    if (month < 1 || month > 12) return false;
+        // Check if month is valid
+        if (month < 1 || month > 12) return false;
 
-    // Check if day is valid
-    if (day < 1 || day > 31) return false;
+        // Check if day is valid
+        if (day < 1 || day > 31) return false;
 
-    // Check for months with 30 days
-    if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) return false;
+        // Check for months with 30 days
+        if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) return false;
 
-    // Check for February
-    if (month == 2) {
-        // Check for leap year
-        bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-        if (day > 29 || (day == 29 && !isLeapYear)) return false;
+        // Check for February
+        if (month == 2) {
+            // Check for leap year
+            bool isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+            if (day > 29 || (day == 29 && !isLeapYear)) return false;
+        }
+
+        return true;
     }
-
-    return true;
-}
 }
