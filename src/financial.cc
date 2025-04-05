@@ -2,6 +2,7 @@
 #include "utilities.hpp"
 #include <stdexcept>
 #include <iostream>
+#include <vector>
 
 namespace Financial {
     double XIRR(const std::vector<double>& cashFlows, const std::vector<int>& dates, const double& rateOfReturn = 0.1) {
